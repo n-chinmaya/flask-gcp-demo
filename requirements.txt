@@ -1,2 +1,4 @@
-flask
-gunicorn
+Flask>=2.0
+gunicorn>=20.0
+# Add any other dependencies your app needs, e.g.:
+# requests
