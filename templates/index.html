@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Sentiment Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Advanced Sentiment Analyzer 🧠</h1>
+        <form method="POST">
+            <textarea name="review" placeholder="Enter text, a review, or a comment to analyze..." required>{{ analysis.text if analysis }}</textarea>
+            <button type="submit">Analyze Text</button>
+        </form>
+
+        {% if analysis %}
+        <div class="results">
+            <h2>Analysis Results</h2>
+            
+            <div class="result-item">
+                <strong>Overall Sentiment</strong>
+                <p>{{ analysis.sentiment }}</p>
+            </div>
+
+            <div class="result-item">
+                <strong>Polarity Score</strong>
+                <p>{{ analysis.polarity }}</p>
+                <small>Ranges from -1 (Negative) to +1 (Positive)</small>
+            </div>
+
+            <div class="result-item">
+                <strong>Subjectivity Score</strong>
+                <p>{{ analysis.subjectivity }}</p>
+                <small>Ranges from 0 (Objective) to 1 (Subjective)</small>
+            </div>
+
+            {% if analysis.noun_phrases %}
+            <div class="result-item key-phrases">
+                <strong>Key Phrases</strong>
+                <ul>
+                    {% for phrase in analysis.noun_phrases %}
+                        <li>{{ phrase }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
